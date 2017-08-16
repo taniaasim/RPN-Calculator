@@ -6,19 +6,18 @@ public class NegateCommand implements Undoable{
 	
 	private Stack<Double> numberStack;
 	private double valuePopped;
-	//private Stack<???> commandHistory;
 	
 	public NegateCommand(Stack<Double> numberStack) {
 		this.numberStack = numberStack;
 	}
 	
 	public void execute() {
-		Double num = numberStack.pop();
-		if (num != 0.0) {
-			Double result = num * -1;	
+		valuePopped = numberStack.pop();
+		if (valuePopped != 0.0) {
+			Double result = valuePopped * -1;	
 			numberStack.push(result);
 		} else {
-			numberStack.push(num);
+			numberStack.push(valuePopped);
 		}
 		
 	}
