@@ -7,12 +7,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.libertymutual.rpncalc.commands.AddCommand;
+import com.libertymutual.rpncalc.commands.ClearCommand;
 import com.libertymutual.rpncalc.commands.MultiplyCommand;
 import com.libertymutual.rpncalc.commands.NegateCommand;
+import com.libertymutual.rpncalc.commands.PushCommand;
 import com.libertymutual.rpncalc.commands.SubtractCommand;
 import com.libertymutual.rpncalc.commands.Undoable;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 import java.util.*;
 
@@ -35,14 +36,16 @@ public class CalculatorController {
 		}
 		return "redirect:/calculator";
 	}
+
 	
     // Use the requestparam thing if the names are different  
 	@PostMapping("/values")
 	public String pushValueOntoStack(double theNumber) {
-		numberStack.push(theNumber);
-		//model.addAttribute("stack", numberStack);
+		PushCommand command = new PushCommand(numberStack, theNumber);
+		command.execute();
+		commandHistory.push(command);
 		return "redirect:/calculator";
-	}
+	} 
 	
 	@GetMapping("")
 	public String goBackToCalculator(Model model) {
@@ -55,9 +58,9 @@ public class CalculatorController {
 	
 	@PostMapping("/operation/clear")
 	public String clearStack(Model model) {
-		while (!(numberStack).isEmpty()) {
-			numberStack.pop();
-		}
+		ClearCommand command = new ClearCommand(numberStack);
+		command.execute();
+		commandHistory.push(command);
 		return "redirect:/calculator";
 	}
 	
