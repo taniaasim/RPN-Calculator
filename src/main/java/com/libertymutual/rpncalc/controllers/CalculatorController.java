@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.libertymutual.rpncalc.commands.AddCommand;
 import com.libertymutual.rpncalc.commands.ClearCommand;
+import com.libertymutual.rpncalc.commands.DividerCommand;
 import com.libertymutual.rpncalc.commands.MultiplyCommand;
 import com.libertymutual.rpncalc.commands.NegateCommand;
 import com.libertymutual.rpncalc.commands.PushCommand;
+import com.libertymutual.rpncalc.commands.ReciprocalCommand;
 import com.libertymutual.rpncalc.commands.SubtractCommand;
 import com.libertymutual.rpncalc.commands.Undoable;
 
@@ -75,6 +77,22 @@ public class CalculatorController {
 	@PostMapping("/operation/negate")
 	public String negateNumber() {
 		NegateCommand command = new NegateCommand(numberStack);
+		command.execute();
+		commandHistory.push(command);
+		return "redirect:/calculator";
+	}
+	
+	@PostMapping("/operation/divide")
+	public String divideNumber() {
+		DividerCommand command = new DividerCommand(numberStack);
+		command.execute();
+		commandHistory.push(command);
+		return "redirect:/calculator";
+	}
+	
+	@PostMapping("/operation/reciprocal")
+	public String recipNumber() {
+		ReciprocalCommand command = new ReciprocalCommand(numberStack);
 		command.execute();
 		commandHistory.push(command);
 		return "redirect:/calculator";

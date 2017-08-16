@@ -21,6 +21,9 @@
 <form method="post" action="/calculator/operation/multiply">
   <button>*</button>
 </form>
+<form method="post" action="/calculator/operation/divide">
+  <button>/</button>
+</form>
 {{/canShowBinaryOperator}}
 
 
@@ -28,7 +31,11 @@
 <form method="post" action="/calculator/operation/negate">
   <button>+/-</button>
 </form>
+<form method="post" action="/calculator/operation/reciprocal">
+  <button>x<sup>-1</sup></button>
+</form>
+{{/canShowUnaryOperator}}
+
 <form method="post" action="/calculator/operation/clear">
   <button>AC</button>
 </form>
-{{/canShowUnaryOperator}}
