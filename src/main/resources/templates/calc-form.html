@@ -1,0 +1,34 @@
+<h2>Make Some Calculations with a RPN Calculator!</h2>
+
+
+<form method="post" action="/calculator/values">
+  <input autofocus type="number" step="any" required name ="theNumber">
+  <button>P</button>
+</form> 
+
+<form method="post" action="/calculator/operation/undo">
+  <button>U</button>
+  {{ undoSize }}
+</form> 
+
+{{#canShowBinaryOperator}}
+<form method="post" action="/calculator/operation/add">
+  <button>+</button>
+</form>
+<form method="post" action="/calculator/operation/subtract">
+  <button>-</button>
+</form>
+<form method="post" action="/calculator/operation/multiply">
+  <button>*</button>
+</form>
+{{/canShowBinaryOperator}}
+
+
+{{#canShowUnaryOperator}}
+<form method="post" action="/calculator/operation/negate">
+  <button>+/-</button>
+</form>
+<form method="post" action="/calculator/operation/clear">
+  <button>AC</button>
+</form>
+{{/canShowUnaryOperator}}

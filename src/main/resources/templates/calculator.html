@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+	<head>
+		<title>This is the calculator</title>	
+		<style>
+			button {
+				margin-bottom: 6px;
+				width: 48px;
+				height: 48px;
+				display: inline-block;
+				border-radius: 24px;
+				box-shadow: 0 2px 2px rgba(0, 0, 0, .4);
+				background-color: #3c7bf9;
+				border: 0;
+				color: white;
+				font-size: 24px;
+				transition: box-shadow .5s;
+			}
+			
+			button:hover {
+				box-shadow: 0 6px 6px rgba(0, 0, 0, .2)
+			} 
+	
+		</style>
+	</head>
+	<body>
+		{{> calc-form }}
+		BOTTOM
+		{{#stack}}
+			<div>{{ . }}</div>
+		{{/stack}}
+		TOP
+		
+	
+	</body>
+</html>
